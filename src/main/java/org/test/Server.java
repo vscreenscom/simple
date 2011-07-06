@@ -48,9 +48,24 @@ public class Server implements Container {
                 response.setText(Status.NOT_FOUND.getDescription());
                 return;                
             }
-            
+
             OutputStream os = response.getOutputStream();
+            
+            // here, we're responding with the bytes of the file
             respond(os, f);
+
+            // in much the same way,
+            // we require an interface that can give us the "converted"
+            // bytes of the video, something like,
+            //
+            // InputStream is = getVideoStream(f);
+            // respond(os, is);
+            //
+            // ideally, the interface could accept a stream in place of a file,
+            // this is the more usual pattern for us, so ...
+            //
+            // InputStream is = getVideoStream(is);
+            // respond(os, is);
         } catch (Throwable t) {
             response.setCode(Status.INTERNAL_SERVER_ERROR.getCode());
             response.setText(Status.INTERNAL_SERVER_ERROR.getDescription());
