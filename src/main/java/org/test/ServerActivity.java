@@ -4,14 +4,19 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class ServerActivity extends Activity {
+	private static final int PORT = 10000;
+	
 	private Server server = null;
+	private TextView portText = null;
 	
 	   @Override
 	   public void onCreate(Bundle savedInstanceState) {
 	       super.onCreate(savedInstanceState);
-	       setContentView(R.layout.main);
+	       setContentView(R.layout.main);	       
+	       portText = (TextView) findViewById(R.id.port_text);
 	   }
 
 	@Override
@@ -22,7 +27,6 @@ public class ServerActivity extends Activity {
 			try {
 				server.stop();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			server = null;
@@ -33,11 +37,13 @@ public class ServerActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		server = new Server(10000);
+		server = new Server(PORT);
 		try {
 			server.start();
+		       portText.setText(Integer.toString(PORT));
 		} catch (IOException e) {
 			e.printStackTrace();
+		       portText.setText("<not started>");
 		}
 	}
 }
