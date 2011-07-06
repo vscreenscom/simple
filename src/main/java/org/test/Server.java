@@ -64,7 +64,7 @@ public class Server implements Container {
             // ideally, the interface could accept a stream in place of a file,
             // this is the more usual pattern for us, so ...
             //
-            // InputStream is = getVideoStream(is);
+            // InputStream is = getVideoStream(someOtherInputStrean);
             // respond(os, is);
         } catch (Throwable t) {
             response.setCode(Status.INTERNAL_SERVER_ERROR.getCode());
