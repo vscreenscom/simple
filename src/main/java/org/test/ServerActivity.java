@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ServerActivity extends Activity {
-	private static final int PORT = 10000;
+	private static final int PORT = 8443;
 	
 	private Server server = null;
 	private TextView portText = null;
@@ -37,7 +37,7 @@ public class ServerActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		server = new Server(PORT);
+		server = new Server(this, PORT, true);
 		try {
 			server.start();
 		       portText.setText(Integer.toString(PORT));
